@@ -191,15 +191,6 @@ function Perfil() {
           tamaño: "1.2 MB",
           estado: "disponible",
         },
-        {
-          id: 4,
-          nombre: "Análisis Preventivo",
-          descripcion: "Recomendaciones para el cuidado preventivo de la visión",
-          fechaCreacion: "2024-03-10",
-          tipo: "PDF",
-          tamaño: "900 KB",
-          estado: "generando",
-        },
       ]
       setReportes(mockReportes)
       setLoadingReportes(false)
