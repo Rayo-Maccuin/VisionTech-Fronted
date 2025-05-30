@@ -145,16 +145,14 @@ function Productos() {
     setPriceRange(newRange)
   }
 
-  // Función para obtener la URL de la imagen - CORREGIDA
   const getImageUrl = (images) => {
     if (!images) return "/placeholder.svg"
 
     try {
       const imageArray = typeof images === "string" ? JSON.parse(images) : images
       if (imageArray && imageArray.length > 0) {
-        // Cambiar la ruta para que apunte a la carpeta public
         const imageName = imageArray[0]
-        return `/${imageName}` // Esto buscará en public/
+        return `/${imageName}`
       }
       return "/placeholder.svg"
     } catch {
@@ -162,7 +160,6 @@ function Productos() {
     }
   }
 
-  // Función para determinar si es bestseller
   const isBestseller = (product) => {
     return product.name.includes("Wayfarer") || product.name.includes("Aviador") || product.name.includes("Luxury")
   }
