@@ -95,6 +95,7 @@
   align-items: center;
   margin-bottom: 1rem;
   transition: transform 0.2s ease;
+  flex-direction: row-reverse;
 }
 
 .service-item:hover {
