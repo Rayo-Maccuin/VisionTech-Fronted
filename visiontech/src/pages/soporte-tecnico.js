@@ -52,7 +52,6 @@ function SoporteTecnico() {
     e.preventDefault()
     setLoading(true)
 
-    // Simular envío al backend
     setTimeout(() => {
       const newTicket = {
         id: `TK-${String(tickets.length + 1).padStart(3, "0")}`,

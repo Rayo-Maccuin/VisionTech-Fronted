@@ -5,16 +5,16 @@ import { Link, useNavigate } from "react-router-dom"
 import { Trash2, Plus, Minus, ShoppingBag, ArrowLeft, Loader2 } from "lucide-react"
 import "./Carrito.css"
 
-// Servicio para manejar las peticiones del carrito - VERSIÓN MEJORADA
+
 const cartService = {
-  // Obtener el token del localStorage
+
   getToken: () => {
     const token = localStorage.getItem("token") || localStorage.getItem("authToken") || localStorage.getItem("jwt")
     console.log("🔑 Token obtenido:", token ? `Token encontrado (${token.length} chars)` : "No hay token")
     return token
   },
 
-  // Headers con autenticación
+
   getHeaders: () => {
     const token = cartService.getToken()
     const headers = {
@@ -33,13 +33,13 @@ const cartService = {
     return headers
   },
 
-  // Verificar si el usuario está autenticado
+
   isAuthenticated: () => {
     const token = cartService.getToken()
     if (!token) return false
 
     try {
-      // Verificar si el token no está expirado (básico)
+
       const payload = JSON.parse(atob(token.split(".")[1]))
       const now = Date.now() / 1000
 
@@ -59,7 +59,6 @@ const cartService = {
     }
   },
 
-  // Obtener carrito
   getCart: async () => {
     try {
       console.log("🛒 Obteniendo carrito...")
@@ -79,7 +78,6 @@ const cartService = {
     }
   },
 
-  // Agregar al carrito - VERSIÓN MEJORADA
   addToCart: async (productId, quantity = 1, prescriptionDetails = null) => {
     try {
       console.log("➕ === INICIO AGREGAR AL CARRITO (FRONTEND) ===")
@@ -89,10 +87,10 @@ const cartService = {
         quantity: typeof quantity,
       })
 
-      // Asegurar que los datos sean del tipo correcto
+
       const requestData = {
-        product_id: Number.parseInt(productId), // Asegurar que sea número
-        quantity: Number.parseInt(quantity), // Asegurar que sea número
+        product_id: Number.parseInt(productId), 
+        quantity: Number.parseInt(quantity), 
         prescription_details: prescriptionDetails,
       }
 
@@ -135,7 +133,7 @@ const cartService = {
     }
   },
 
-  // Actualizar cantidad
+
   updateQuantity: async (cartId, quantity) => {
     try {
       console.log("🔄 Actualizando cantidad:", { cartId, quantity })
@@ -153,7 +151,7 @@ const cartService = {
     }
   },
 
-  // Eliminar del carrito
+
   removeFromCart: async (cartId) => {
     try {
       console.log("🗑️ Eliminando del carrito:", cartId)
@@ -170,7 +168,6 @@ const cartService = {
     }
   },
 
-  // Limpiar carrito
   clearCart: async () => {
     try {
       console.log("🧹 Limpiando carrito...")
@@ -196,9 +193,7 @@ function Carrito() {
   const [updating, setUpdating] = useState({})
   const [debugInfo, setDebugInfo] = useState({})
 
-  // Cargar carrito al montar el componente
   useEffect(() => {
-    // Debug: mostrar información de autenticación
     const token = cartService.getToken()
     const isAuth = cartService.isAuthenticated()
 
@@ -232,7 +227,7 @@ function Carrito() {
       setLoading(true)
       setError(null)
 
-      // Verificar autenticación
+
       if (!cartService.isAuthenticated()) {
         setError("Debes iniciar sesión para ver tu carrito")
         setLoading(false)
@@ -244,7 +239,7 @@ function Carrito() {
       if (response.success) {
         setCartItems(response.cart.items || [])
       } else {
-        // Si el error es de autenticación, limpiar tokens
+
         if (response.message && (response.message.includes("Token") || response.message.includes("autenticación"))) {
           localStorage.removeItem("token")
           localStorage.removeItem("authToken")
@@ -311,7 +306,7 @@ function Carrito() {
     }
   }
 
-  // Función para obtener la URL de la imagen
+
   const getImageUrl = (images) => {
     if (!images) return "/placeholder.svg"
 
@@ -323,12 +318,12 @@ function Carrito() {
     }
   }
 
-  // Función para forzar recarga del carrito
+
   const forceReload = () => {
     loadCart()
   }
 
-  // Calcular totales
+
   const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
   const tax = subtotal * 0.16
   const total = subtotal + tax
@@ -340,7 +335,7 @@ function Carrito() {
     navigate("/pago")
   }
 
-  // Mostrar loading
+
   if (loading) {
     return (
       <div className="carrito-page">
@@ -361,7 +356,6 @@ function Carrito() {
     )
   }
 
-  // Mostrar error de autenticación
   if (error && (error.includes("iniciar sesión") || error.includes("sesión ha expirado"))) {
     return (
       <div className="carrito-page">
@@ -371,7 +365,7 @@ function Carrito() {
             <p className="carrito-subtitle">Necesitas iniciar sesión</p>
           </div>
 
-          {/* Debug info - remover en producción */}
+          {}
           <div
             style={{
               background: "#f0f0f0",
@@ -564,7 +558,6 @@ function Carrito() {
   )
 }
 
-// Exportar también el servicio para usarlo en otros componentes
 export { cartService }
 export default Carrito
 

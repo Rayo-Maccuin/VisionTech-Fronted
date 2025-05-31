@@ -18,7 +18,7 @@ function CompartirRedes() {
 
   const loadProducts = async () => {
     setLoading(true)
-    // Simular llamada al backend
+    
     setTimeout(() => {
       const mockProducts = [
         {
@@ -53,7 +53,7 @@ function CompartirRedes() {
   }
 
   const loadShareStats = async () => {
-    // Simular carga de estadísticas de compartir
+
     setTimeout(() => {
       setShareStats({
         totalShares: 2847,
@@ -94,7 +94,7 @@ function CompartirRedes() {
   const handleShare = async (platform, product) => {
     const shareContent = generateShareContent(platform, product)
 
-    // Simular registro de compartir en backend
+
     setTimeout(() => {
       console.log(`Compartido en ${platform}:`, {
         productId: product.id,
@@ -102,7 +102,7 @@ function CompartirRedes() {
         timestamp: new Date().toISOString(),
       })
 
-      // Actualizar estadísticas localmente
+      // Actualizar estadísticas 
       setShareStats((prev) => ({
         ...prev,
         totalShares: prev.totalShares + 1,
@@ -120,11 +120,10 @@ function CompartirRedes() {
       }, 3000)
     }, 500)
 
-    // Abrir ventana de compartir (excepto Instagram)
     if (platform !== "instagram") {
       window.open(shareContent.url, "_blank", "width=600,height=400")
     } else {
-      // Para Instagram, copiar el texto al portapapeles
+
       try {
         await navigator.clipboard.writeText(shareContent.text)
         setNotification({

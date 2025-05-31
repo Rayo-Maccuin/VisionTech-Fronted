@@ -35,7 +35,7 @@ function FormularioReporteMedico({ onClose, pacienteInfo = null, onReporteGenera
     // Seguimiento
     proximaCita: "",
     observacionesGenerales: "",
-    doctorNombre: "Dr. Mario Sosa", // Por defecto
+    doctorNombre: "Dr. Mario Sosa", 
   })
 
   const [loading, setLoading] = useState(false)
@@ -64,7 +64,7 @@ function FormularioReporteMedico({ onClose, pacienteInfo = null, onReporteGenera
     e.preventDefault()
     setLoading(true)
 
-    // Validaciones básicas
+
     if (!formData.pacienteNombre || !formData.motivoConsulta || !formData.diagnosticoPrincipal) {
       setNotification({
         show: true,
@@ -76,7 +76,7 @@ function FormularioReporteMedico({ onClose, pacienteInfo = null, onReporteGenera
       return
     }
 
-    // Simular envío al backend
+
     setTimeout(() => {
       console.log("Reporte médico generado:", {
         ...formData,
@@ -84,7 +84,7 @@ function FormularioReporteMedico({ onClose, pacienteInfo = null, onReporteGenera
         reporteId: `RPT-${Date.now()}`,
       })
 
-      // Llamar a la función callback para agregar el reporte al perfil
+
       if (onReporteGenerado) {
         onReporteGenerado(formData)
       }

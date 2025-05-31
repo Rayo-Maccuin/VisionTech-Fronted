@@ -19,7 +19,7 @@ function EncuestasSatisfaccion() {
 
   const loadSurveys = async () => {
     setLoading(true)
-    // Simular llamada al backend
+
     setTimeout(() => {
       const mockSurveys = [
         {
@@ -71,7 +71,7 @@ function EncuestasSatisfaccion() {
   }
 
   const loadStats = async () => {
-    // Simular carga de estadísticas
+
     setTimeout(() => {
       setStats({
         totalRespuestas: 1247,
@@ -108,7 +108,6 @@ function EncuestasSatisfaccion() {
       return
     }
 
-    // Simular envío al backend
     setTimeout(() => {
       console.log("Enviando respuestas:", {
         surveyId: currentSurvey.id,
